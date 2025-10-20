@@ -14,14 +14,19 @@ MULTI_PATH = "localhost2002/multiclass-distilbert"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load binary model
-binary_tokenizer = DistilBertTokenizer.from_pretrained(BINARY_PATH, use_auth_token=HF_TOKEN)
-binary_model = DistilBertForSequenceClassification.from_pretrained(BINARY_PATH, use_auth_token=HF_TOKEN)
+binary_tokenizer = DistilBertTokenizer.from_pretrained(BINARY_PATH, token=HF_TOKEN)
+binary_model = DistilBertForSequenceClassification.from_pretrained(BINARY_PATH, token=HF_TOKEN)
 binary_model.to(device)
 binary_model.eval()
 
+
+
+
+
+
 # Load multiclass model
-multi_tokenizer = DistilBertTokenizer.from_pretrained(MULTI_PATH, use_auth_token=HF_TOKEN)
-multi_model = DistilBertForSequenceClassification.from_pretrained(MULTI_PATH, use_auth_token=HF_TOKEN)
+multi_tokenizer = DistilBertTokenizer.from_pretrained(MULTI_PATH,token=HF_TOKEN)
+multi_model = DistilBertForSequenceClassification.from_pretrained(MULTI_PATH,token=HF_TOKEN)
 multi_model.to(device)
 multi_model.eval()
 
