@@ -7,7 +7,7 @@ from transformers import DistilBertTokenizer, DistilBertForSequenceClassificatio
 HF_TOKEN = os.getenv("HF_TOKEN")
 
 # Hugging Face model repo paths
-BINARY_PATH = "localhost2002/binary-distilbert"
+BINARY_PATH = "localhost2002/bindary-distilbert"
 MULTI_PATH = "localhost2002/multiclass-distilbert"
 
 # Device setup
