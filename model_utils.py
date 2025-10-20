@@ -1,19 +1,27 @@
 import torch
 import numpy as np
+import os
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
 
-# Load binary model
-BINARY_PATH = "saved_models/binary_distilbert"
-binary_tokenizer = DistilBertTokenizer.from_pretrained(BINARY_PATH)
-binary_model = DistilBertForSequenceClassification.from_pretrained(BINARY_PATH)
+# Use HF_TOKEN from environment for private repos
+HF_TOKEN = os.getenv("HF_TOKEN")
+
+# Hugging Face model repo paths
+BINARY_PATH = "localhost2002/binary-distilbert"
+MULTI_PATH = "localhost2002/multiclass-distilbert"
+
+# Device setup
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Load binary model
+binary_tokenizer = DistilBertTokenizer.from_pretrained(BINARY_PATH, use_auth_token=HF_TOKEN)
+binary_model = DistilBertForSequenceClassification.from_pretrained(BINARY_PATH, use_auth_token=HF_TOKEN)
 binary_model.to(device)
 binary_model.eval()
 
 # Load multiclass model
-MULTI_PATH = "saved_models/multiclass_distilbert"
-multi_tokenizer = DistilBertTokenizer.from_pretrained(MULTI_PATH)
-multi_model = DistilBertForSequenceClassification.from_pretrained(MULTI_PATH)
+multi_tokenizer = DistilBertTokenizer.from_pretrained(MULTI_PATH, use_auth_token=HF_TOKEN)
+multi_model = DistilBertForSequenceClassification.from_pretrained(MULTI_PATH, use_auth_token=HF_TOKEN)
 multi_model.to(device)
 multi_model.eval()
 
